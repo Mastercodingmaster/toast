@@ -38,8 +38,6 @@ export default function Home() {
       duration: duration[0],
     };
 
-    console.log("showToast called with type:", type, "position:", position, "duration:", duration[0]);
-
     switch (type) {
       case "success":
         toast.success("Profile updated successfully!", options);
