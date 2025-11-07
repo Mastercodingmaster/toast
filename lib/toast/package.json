@@ -27,7 +27,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && tsc",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
