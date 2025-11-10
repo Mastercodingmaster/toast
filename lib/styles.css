@@ -1,0 +1,59 @@
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+}
+
+.toast-item {
+  animation: toast-enter 0.2s ease-out;
+}
+
+.toast-item.toast-exit {
+  animation: toast-exit 0.15s ease-in;
+}
+
+[data-testid^="toast-container-bottom"] .toast-item {
+  animation-name: toast-enter-bottom;
+}
+
+[data-testid^="toast-container-bottom"] .toast-item.toast-exit {
+  animation-name: toast-exit-bottom;
+}
+
+@keyframes toast-enter-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-exit-bottom {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
