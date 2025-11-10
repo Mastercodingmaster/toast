@@ -24,8 +24,8 @@ import {
   Settings,
   MapPin,
 } from "lucide-react";
-import { toast, type ToastPosition } from "pixel-doez-planes";
-import "pixel-doez-planes/style.css";
+import { toast, type ToastPosition } from "../../../lib/toast";
+import "../../../lib/toast/styles.css";
 
 export default function Home() {
   const [position, setPosition] = useState<ToastPosition>("bottom-right");

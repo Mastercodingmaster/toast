@@ -1,5 +1,5 @@
-import { Toast, ToastContainer } from "pixel-doez-planes";
-import "pixel-doez-planes/style.css";
+import { ToastContainer } from "../../../lib/toast";
+import "../../../lib/toast/styles.css";
 import { Interpreter } from "@/components/interpreter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
