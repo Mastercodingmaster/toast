@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import type { Toast, ToastPosition } from "@shared/toast-types";
+import type { Toast, ToastPosition } from "./types";
 import { toastManager } from "./toast-manager";
 import { ToastItem } from "./toast-item";
 import { cn } from "@/lib/utils";
@@ -39,7 +39,7 @@ export function ToastContainer({ position = "top-right" }: ToastContainerProps) 
   }, []);
 
   const toastsByPosition = toasts.reduce((acc, toast) => {
-    const pos = toast.options.position || position;
+    const pos = toast.position || position;
     if (!acc[pos]) {
       acc[pos] = [];
     }
