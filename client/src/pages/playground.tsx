@@ -1,6 +1,6 @@
 import { Toast, ToastContainer } from "pixel-doez-planes";
 import "pixel-doez-planes/dist/style.css";
-import code
+import interpreter from "@/components/interpreter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
