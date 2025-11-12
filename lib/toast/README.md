@@ -19,20 +19,20 @@ A modern, feature-rich toast notification library for React with TypeScript supp
 ### Via npm
 
 ```bash
-npm install pixel-doez-planes
+npm install @pixel-doez-planes/toast
 ```
 
 ### Via CDN
 
 ```javascript
-import { toast, ToastContainer } from 'https://cdn.jsdelivr.net/npm/pixel-doez-planes/dist/index.esm.js';
+import { toast, ToastContainer } from 'https://cdn.jsdelivr.net/npm/@pixel-doez-planes/toast/dist/index.esm.js';
 ```
 
 ## Quick Start
 
 ```tsx
-import { toast, ToastContainer } from 'pixel-doez-planes';
-import 'pixel-doez-planes/dist/style.css';
+import { toast, ToastContainer } from '@pixel-doez-planes/toast';
+import '@pixel-doez-planes/toast/dist/style.css';
 
 function App() {
   return (
@@ -142,7 +142,7 @@ toast({
 ### Dismiss Toasts
 
 ```typescript
-import { dismissToast } from 'pixel-doez-planes';
+import { dismissToast } from '@pixel-doez-planes/toast';
 
 // Get toast ID (await the promise)
 const toastId = await toast({ title: 'Processing...', variant: 'loading' });
@@ -210,7 +210,7 @@ import {
   ToastOptions, 
   ToastVariant, 
   ToastPosition 
-} from 'pixel-doez-planes';
+} from '@pixel-doez-planes/toast';
 
 const options: ToastOptions = {
   title: 'Typed toast!',

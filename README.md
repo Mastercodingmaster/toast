@@ -18,13 +18,13 @@ A modern, feature-rich toast notification library for React applications with Ty
 ### npm
 
 ```bash
-npm install pixel-doez-planes
+npm install @pixel-doez-planes/toast
 ```
 
 ### CDN
 
 ```javascript
-import { toast, ToastContainer } from 'https://cdn.jsdelivr.net/npm/pixel-doez-planes/dist/index.esm.js';
+import { toast, ToastContainer } from 'https://cdn.jsdelivr.net/npm/@pixel-doez-planes/toast/dist/index.esm.js';
 ```
 
 ## Quick Start
@@ -32,8 +32,8 @@ import { toast, ToastContainer } from 'https://cdn.jsdelivr.net/npm/pixel-doez-p
 ### 1. Add ToastContainer to your app
 
 ```jsx
-import { ToastContainer } from 'pixel-doez-planes';
-import 'pixel-doez-planes/dist/style.css';
+import { ToastContainer } from '@pixel-doez-planes/toast';
+import '@pixel-doez-planes/toast/dist/style.css';
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
 ### 2. Use the toast function
 
 ```javascript
-import { toast } from 'pixel-doez-planes';
+import { toast } from '@pixel-doez-planes/toast';
 
 // Basic usage
 toast({ 
@@ -173,7 +173,7 @@ The toast will automatically:
 ### Dismissing Toasts
 
 ```javascript
-import { dismissToast } from 'pixel-doez-planes';
+import { dismissToast } from '@pixel-doez-planes/toast';
 
 // Dismiss all toasts
 dismissToast();
@@ -208,7 +208,7 @@ import {
   ToastVariant, 
   ToastPosition,
   ToastFunction 
-} from 'pixel-doez-planes';
+} from '@pixel-doez-planes/toast';
 
 const options: ToastOptions = {
   title: 'Typed Toast',
