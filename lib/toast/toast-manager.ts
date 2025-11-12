@@ -24,7 +24,7 @@ class ToastManager {
       id,
       title: options.title,
       description: options.description,
-      variant: options.variant,
+      variant: options.variant ?? "success",
       position: options.position ?? "bottom-right",
       duration: options.variant === "loading" ? 0 : (options.duration ?? 4000),
       dismissible: options.dismissible ?? true,
