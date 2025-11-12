@@ -37,7 +37,7 @@ import 'pixel-doez-planes/dist/style.css';
 function App() {
   return (
     <>
-      <button onClick={() => toast.success('Hello World!')}>
+      <button onClick={() => toast({ title: 'Hello World!', variant: 'success' })}>
         Show Toast
       </button>
       <ToastContainer />
@@ -52,37 +52,82 @@ function App() {
 
 ```typescript
 // Success toast
-toast.success('Profile updated successfully!');
+toast({ 
+  title: 'Profile updated successfully!', 
+  variant: 'success' 
+});
 
 // Error toast
-toast.error('Failed to save changes');
+toast({ 
+  title: 'Failed to save changes', 
+  variant: 'error' 
+});
 
 // Warning toast
-toast.warning('Your session will expire soon');
+toast({ 
+  title: 'Your session will expire soon', 
+  variant: 'warning' 
+});
 
 // Info toast
-toast.info('New features available');
+toast({ 
+  title: 'New features available', 
+  variant: 'info' 
+});
 
 // Loading toast
-toast.loading('Uploading files...');
+toast({ 
+  title: 'Uploading files...', 
+  variant: 'loading' 
+});
+```
+
+### With Descriptions
+
+```typescript
+toast({
+  title: 'Upload Complete',
+  description: 'Your file has been uploaded successfully.',
+  variant: 'success'
+});
 ```
 
 ### Promise API
 
-```typescript
-const myPromise = fetch('/api/data');
+Perfect for async operations like API calls:
 
-toast.promise(myPromise, {
-  loading: 'Loading data...',
-  success: 'Data loaded successfully!',
-  error: 'Failed to load data',
-});
+```typescript
+const uploadFile = async () => {
+  const uploadPromise = fetch('/api/upload', {
+    method: 'POST',
+    body: formData
+  });
+
+  toast({
+    title: 'Uploading...',
+    variant: 'loading',
+    promise: {
+      promise: uploadPromise,
+      loading: 'Uploading file...',
+      success: 'File uploaded successfully!',
+      error: 'Upload failed. Please try again.'
+    }
+  });
+};
 ```
+
+The toast will automatically:
+- Show loading state while the promise is pending
+- Switch to success when the promise resolves
+- Switch to error if the promise rejects
 
 ### Custom Options
 
 ```typescript
-toast.success('Custom toast!', {
+toast({
+  title: 'Custom toast!',
+  description: 'With extra customization',
+  variant: 'success',
   duration: 5000,
   position: 'top-center',
   icon: '🎉',
@@ -90,47 +135,58 @@ toast.success('Custom toast!', {
   style: {
     background: '#333',
     color: '#fff',
-  },
+  }
 });
 ```
 
 ### Dismiss Toasts
 
 ```typescript
-// Get toast ID
-const toastId = toast.loading('Processing...');
+import { dismissToast } from 'pixel-doez-planes';
+
+// Get toast ID (await the promise)
+const toastId = await toast({ title: 'Processing...', variant: 'loading' });
 
 // Dismiss specific toast
-toast.dismiss(toastId);
+dismissToast(toastId);
 
 // Dismiss all toasts
-toast.dismiss();
+dismissToast();
 ```
 
 ## API Reference
 
-### Toast Methods
+### Toast Function
 
-| Method | Description | Return Type |
-|--------|-------------|-------------|
-| `toast.success(message, options?)` | Show success toast | `string` |
-| `toast.error(message, options?)` | Show error toast | `string` |
-| `toast.warning(message, options?)` | Show warning toast | `string` |
-| `toast.info(message, options?)` | Show info toast | `string` |
-| `toast.loading(message, options?)` | Show loading toast | `string` |
-| `toast.promise(promise, messages, options?)` | Handle promise states | `Promise` |
-| `toast.dismiss(id?)` | Dismiss toast(s) | `void` |
+```typescript
+toast(options: ToastOptions): Promise<string>
+```
+
+Returns a promise that resolves to a unique toast ID that can be used to dismiss it later.
 
 ### Toast Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `duration` | `number` | `3000` | Duration in milliseconds (0 = permanent) |
-| `position` | `ToastPosition` | `'top-right'` | Toast position on screen |
-| `icon` | `ReactNode` | - | Custom icon element |
-| `className` | `string` | - | Additional CSS classes |
-| `style` | `CSSProperties` | - | Inline styles |
-| `dismissible` | `boolean` | `true` | Show dismiss button |
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `title` | `string` | ✅ | - | Main toast message |
+| `description` | `string` | ❌ | - | Optional subtitle/details |
+| `variant` | `ToastVariant` | ✅ | - | Toast type: `'success'`, `'error'`, `'warning'`, `'info'`, `'loading'` |
+| `position` | `ToastPosition` | ❌ | `'bottom-right'` | Toast position on screen |
+| `duration` | `number` | ❌ | `4000` | Duration in milliseconds (`Infinity` = permanent, `0` for loading toasts) |
+| `icon` | `ReactNode` | ❌ | - | Custom icon (emoji, string, or React element) |
+| `className` | `string` | ❌ | - | Additional CSS classes |
+| `style` | `CSSProperties` | ❌ | - | Inline styles |
+| `dismissible` | `boolean` | ❌ | `true` | Show dismiss button |
+| `promise` | `PromiseOptions` | ❌ | - | Promise handling configuration |
+
+### Promise Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `promise` | `Promise<any>` | The promise to track |
+| `loading` | `string` | Message while promise is pending |
+| `success` | `string` | Message when promise resolves |
+| `error` | `string` | Message when promise rejects |
 
 ### ToastPosition Type
 
@@ -149,14 +205,54 @@ type ToastPosition =
 This library is written in TypeScript and includes complete type definitions.
 
 ```typescript
-import { toast, ToastOptions, ToastPosition } from 'pixel-doez-planes';
+import { 
+  toast, 
+  ToastOptions, 
+  ToastVariant, 
+  ToastPosition 
+} from 'pixel-doez-planes';
 
 const options: ToastOptions = {
+  title: 'Typed toast!',
+  description: 'Full IntelliSense support',
+  variant: 'success',
   duration: 5000,
   position: 'top-center',
 };
 
-toast.success('Typed toast!', options);
+toast(options);
+```
+
+### Type Definitions
+
+```typescript
+type ToastVariant = 'success' | 'error' | 'warning' | 'info' | 'loading';
+
+type ToastPosition =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right';
+
+interface ToastOptions {
+  title: string;
+  description?: string;
+  variant: ToastVariant;
+  position?: ToastPosition;
+  duration?: number;
+  icon?: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  dismissible?: boolean;
+  promise?: {
+    promise: Promise<any>;
+    loading: string;
+    success: string;
+    error: string;
+  };
+}
 ```
 
 ## License
