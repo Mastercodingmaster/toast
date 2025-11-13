@@ -1,6 +1,6 @@
 {
   "name": "@pixel-doez-planes/toast",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A modern, feature-rich toast notification library for React with TypeScript support",
   "author": "",
   "license": "MIT",
@@ -43,5 +43,8 @@
   "bugs": {
     "url": "https://github.com/pixel-doez-planes/toast/issues"
   },
-  "homepage": "https://github.com/pixel-doez-planes/toast#readme"
+  "homepage": "https://github.com/pixel-doez-planes/toast#readme",
+  "dependencies": {
+    "@pixel-doez-planes/toast": "^3.0.2"
+  }
 }
