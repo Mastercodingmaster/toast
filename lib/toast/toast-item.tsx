@@ -59,7 +59,7 @@ export function ToastItem({ toast, onDismiss, onRemove }: ToastItemProps) {
   return (
     <div
       className={cn(
-        "toast-item pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg border shadow-lg",
+        "toast-item",
         variantStyles[toast.variant],
         toast.isExiting && "toast-exit",
         toast.className
@@ -67,18 +67,18 @@ export function ToastItem({ toast, onDismiss, onRemove }: ToastItemProps) {
       style={toast.style}
       data-testid={`toast-${toast.variant}`}
     >
-      <div className="flex items-start gap-3 p-4">
+      <div className="toast-content">
         {toast.icon !== undefined ? (
-          toast.icon
+          <div className="toast-icon-wrapper">{toast.icon}</div>
         ) : (
-          <Icon className={cn("h-5 w-5 flex-shrink-0", iconStyles[toast.variant])} />
+          <Icon className={cn("toast-icon", iconStyles[toast.variant])} />
         )}
-        <div className="flex-1">
-          <div className="text-sm font-semibold text-foreground">
+        <div className="toast-text">
+          <div className="toast-title">
             {toast.title}
           </div>
           {toast.description && (
-            <div className="mt-1 text-sm text-muted-foreground">
+            <div className="toast-description">
               {toast.description}
             </div>
           )}
@@ -86,10 +86,10 @@ export function ToastItem({ toast, onDismiss, onRemove }: ToastItemProps) {
         {toast.dismissible && (
           <button
             onClick={handleDismiss}
-            className="flex-shrink-0 rounded-md p-1 hover-elevate active-elevate-2 transition-colors"
+            className="toast-close-button"
             data-testid={`button-dismiss-toast-${toast.id}`}
           >
-            <X className="h-4 w-4" />
+            <X className="toast-close-icon" />
           </button>
         )}
       </div>
