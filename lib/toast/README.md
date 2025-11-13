@@ -1,4 +1,4 @@
-# Toast Notifications
+# Toast Notifications - Made with Typescript React (.tsx)
 
 A modern, feature-rich toast notification library for React with TypeScript support.
 
@@ -170,7 +170,7 @@ Returns a promise that resolves to a unique toast ID that can be used to dismiss
 |--------|------|----------|---------|-------------|
 | `title` | `string` | ✅ | - | Main toast message |
 | `description` | `string` | ❌ | - | Optional subtitle/details |
-| `variant` | `ToastVariant` | ✅ | - | Toast type: `'success'`, `'error'`, `'warning'`, `'info'`, `'loading'` |
+| `variant` | `ToastVariant` | ❌ | `success` | Toast type: `'success'`, `'error'`, `'warning'`, `'info'`, `'loading'` |
 | `position` | `ToastPosition` | ❌ | `'bottom-right'` | Toast position on screen |
 | `duration` | `number` | ❌ | `4000` | Duration in milliseconds (`Infinity` = permanent, `0` for loading toasts) |
 | `icon` | `ReactNode` | ❌ | - | Custom icon (emoji, string, or React element) |
@@ -254,7 +254,62 @@ interface ToastOptions {
   };
 }
 ```
+## Other examples (full page examples)
+```typescript
+  import { Toast, ToastContainer } from "pixel-doez-planes/toast"
+  import { Button } from "btn-path"
 
+  export default function ExampleOne() {
+    const form_data = {}
+    function submit() {
+      toast({
+        title: "Your form has been submitted",
+        description: "${form_data}",
+        variant: "success",
+      });
+    }
+    return (
+      <div className="tailwind-css-or-classname">
+        <Button onClick={submit()}></Button>
+        </div>
+    )
+  }
+```
+***
+
+```typescript
+  import { Toast, ToastContainer } from "pixel-doez-planes/toast"
+  import { Button } from "@/ui/button"
+  
+  export default function ExamplePromise() {
+    const formData = ['formData']
+    const uploadFile = async () => {
+      const uploadPromise = fetch('api/createUser', {
+        method: "POST",
+        body: formData
+      })
+      toast({
+        title: 'Uploading...',
+        variant: 'loading',
+        promise: {
+          promise: uploadPromise,
+          loading: 'Uploading file...',
+          success: 'File uploaded successfully!',
+          error: 'Upload failed. Please try again.'
+        }
+      });
+    }
+    
+    return (
+      <div className="tailwindcss-config">
+        
+        <Button className="submit" onClick={uploadFile()}>
+        //Submit
+        </Button>
+      </div>
+    )
+  }
+```
 ## License
 
 MIT
